@@ -24,4 +24,10 @@
  */
 
 $string['pluginname'] = 'NeuroMoodle';
-$string['local_neuromoodle'] = 'NeuroMoodle';
+$string['local_neuromoodle'] = 'NeuroK Server Connection';
+$string['info'] = 'This pluggin allows your Moodle installation to connect to NeuroK App. You can create NeuroK courses and manage them from Moodle. You can manage NeuroK users too, migrating them from Moodle.';
+$string['neurokapiurl'] = 'NeuroK API URL';
+$string['enableconnection'] = 'Enable NeuroK Connection';
+$string['enableinfo'] = 'Default: No';
+$string['save'] = 'Save changes';
+$string['titleconfigpage'] = 'NeuroMoodle configuration';

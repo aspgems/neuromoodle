@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-if ($hassiteconfig) { // needs this condition or there is error on login page
+if ($hassiteconfig) {
     $ADMIN->add('server', new admin_externalpage('local_neuromoodle',
             get_string('pluginname', 'local_neuromoodle'),
             new moodle_url('/local/neuromoodle/index.php')));
