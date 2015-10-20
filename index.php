@@ -39,7 +39,6 @@ $PAGE->set_pagelayout('admin');
 $mform = new local_neuromoodle_form(new moodle_url('/local/neuromoodle/'));
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('titleconfigpage','local_neuromoodle'));
+echo $OUTPUT->heading(get_string('titleconfigpage', 'local_neuromoodle'));
 $mform->display();
 echo $OUTPUT->footer();
-
