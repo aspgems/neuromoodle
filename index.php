@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Add page to admin menu.
+ * NeuroK course management page.
  *
  * @package    local
  * @subpackage neuromoodle
@@ -24,21 +24,25 @@
  */
 
 require_once('../../config.php');
-require_once($CFG->libdir . '/adminlib.php');
-require_once($CFG->dirroot . '/local/neuromoodle/locallib.php');
+require_once ('lib.php');
 
-require_login();
-require_capability('moodle/site:config', context_system::instance());
+$id = required_param('id', PARAM_INT); // Course ID.
+$course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
+unset($id);
 
-admin_externalpage_setup('local_neuromoodle', '', null);
+require_course_login($course, true);
+require_capability('local/neuromoodle:manage', context_system::instance());
 
-$PAGE->set_heading($SITE->fullname);
-$PAGE->set_title($SITE->fullname . ': ' . get_string('pluginname', 'local_neuromoodle'));
-$PAGE->set_pagelayout('admin');
+$PAGE->set_url('/local/neuromoodle/index.php', array('id' => $course->id));
+$PAGE->set_heading($course->fullname);
+$PAGE->set_title($course->shortname.': '. get_string('pluginname', 'local_neuromoodle'));
+$PAGE->set_pagelayout('incourse');
 
-$mform = new local_neuromoodle_form(new moodle_url('/local/neuromoodle/'));
+$mform = new local_neuromoodle_createneurocourse_form(new moodle_url('/local/neuromoodle/neurocourse.php'));
+$mform2 = new local_neuromoodle_createneurouser_form(new moodle_url('/local/neuromoodle/neurouser.php'));
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('titleconfigpage', 'local_neuromoodle'));
+echo $OUTPUT->heading(get_string('titlepage', 'local_neuromoodle'));
 $mform->display();
+$mform2->display();
 echo $OUTPUT->footer();
