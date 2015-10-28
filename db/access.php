@@ -17,7 +17,7 @@
 /**
  * NeuroMoodle Capabilities
  *
- * @package    local
+ * @package    mod
  * @subpackage neuromoodle
  * @copyright  2015 ASPgems
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
@@ -29,9 +29,10 @@ $capabilities = array(
     'local/neuromoodle:manage' => array(
             'riskbitmask' => RISK_XSS,
             'captype' => 'write',
-            'contextlevel' => CONTEXT_MODULE,
+            'contextlevel' => CONTEXT_COURSE,
             'archetypes' => array(
-                    'editingteacher' => CAP_ALLOW
+                    'editingteacher' => CAP_ALLOW,
+                    'manager' => CAP_ALLOW
             )
     ),
 );
