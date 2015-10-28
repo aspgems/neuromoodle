@@ -26,14 +26,20 @@
 // index.php
 $string['titlepage'] = 'NeuroK Moodle Activity';
 $string['plugininfo'] = 'This module allows to connect to NeuroK App.';
+$string['pluginadministration'] = 'NeuroK Moodle Settings';
 // settings.php
-$string['pluginname'] = 'NeuroK Moodle';
+$string['modulename'] = 'NeuroK Moodle';
+$string['modulenameplural'] = 'NeuroK Moodle';
 $string['neuromoodlename'] = 'NeuroMoodle';
 $string['neuromoodlename_help'] = 'NeuroMoodle information';
 $string['neurokapiurl'] = 'NeuroK API URL';
 $string['neurokapikey'] = 'NeuroK API Key';
 $string['neurokenableconnection'] = 'Enable NeuroK Connection';
+// access.php
+$string['neuromoodle:view'] = 'View NeuroK Course URL';
 // mod_form.php
+$string['neurokcoursetitle'] = 'NeuroK course title';
+$string['neurokcoursetitle_help'] = 'NeuroK course title';
 $string['neurokcourselink'] = 'NeuroK course URL';
 $string['neurokcourselink_help'] = 'URL to access NeuroK course';
 

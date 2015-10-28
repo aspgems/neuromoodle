@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) {
-    $neuromoodlesettings = new admin_settingpage('neuromoodle', new lang_string('pluginname', 'neuromoodle'));
+    $neuromoodlesettings = new admin_settingpage('neuromoodle', new lang_string('modulename', 'neuromoodle'));
     $neuromoodlesettings->add(new admin_setting_configcheckbox('neurok_enableconnection', new lang_string('neurokenableconnection', 'neuromoodle'), null, 0));
     $neuromoodlesettings->add(new admin_setting_configtext('neurok_apiurl', new lang_string('neurokapiurl', 'neuromoodle'), null, '', PARAM_URL));
     $neuromoodlesettings->add(new admin_setting_configtext('neurok_apikey', new lang_string('neurokapikey', 'neuromoodle'), null, '', PARAM_TEXT));

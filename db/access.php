@@ -48,7 +48,7 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-
+/*
     'mod/neuromoodle:submit' => array(
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
@@ -57,4 +57,5 @@ $capabilities = array(
             'student' => CAP_ALLOW
         )
     ),
+*/
 );
