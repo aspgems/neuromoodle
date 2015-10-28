@@ -24,25 +24,40 @@
  */
 
 require_once('../../config.php');
-require_once ('lib.php');
+require_once('lib.php');
 
-$id = required_param('id', PARAM_INT); // Course ID.
-$course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
-unset($id);
-
-require_course_login($course, true);
-require_capability('local/neuromoodle:manage', context_system::instance());
-
-$PAGE->set_url('/local/neuromoodle/index.php', array('id' => $course->id));
-$PAGE->set_heading($course->fullname);
-$PAGE->set_title($course->shortname.': '. get_string('pluginname', 'local_neuromoodle'));
+// Get course ID from URL
+$id = required_param('id', PARAM_INT);
+// Get course information
+$course = get_course($id);
+// Funcionality only available inside the course.
+require_login($course);
+// Only users with neuromoodle capability can see neuromoodle settings.
+require_capability('local/neuromoodle:manage', context_course::instance($course->id));
+// Needed URLs
+$index_url = new moodle_url('/local/neuromoodle/index.php', array('id' => $course->id));
+$course_url = new moodle_url('/course/view.php', array('id' => $course->id));
+// Page basic information
 $PAGE->set_pagelayout('incourse');
+$PAGE->set_url($index_url);
+$PAGE->set_title($course->shortname.': '. get_string('pluginname', 'local_neuromoodle'));
+$PAGE->set_heading($course->fullname);
 
-$mform = new local_neuromoodle_createneurocourse_form(new moodle_url('/local/neuromoodle/neurocourse.php'));
-$mform2 = new local_neuromoodle_createneurouser_form(new moodle_url('/local/neuromoodle/neurouser.php'));
+$create_course_form = new local_neuromoodle_createneurocourse_form();
 
+if ($create_course_form->is_cancelled()) {
+    //Handle form cancel operation, if cancel button is present on form
+    redirect($course_url);   
+} else if ($fromform = $create_course_form->get_data()) {
+    //In this case you process validated data. $mform->get_data() returns data posted in form.
+} else {
+    // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
+    // or on the first display of the form.
+
+    //Set default data (if any)
+    //$createcourseform->set_data($toform);
+}
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('titlepage', 'local_neuromoodle'));
-$mform->display();
-$mform2->display();
+$create_course_form->display();
 echo $OUTPUT->footer();

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/neuromoodle/db" VERSION="20151021" COMMENT="XMLDB file for Moodle local/neuromoodle"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_neuromoodle" COMMENT="This table is used to save related configuration for NeuroK connection.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="enable" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Configuration about the service status."/>
+        <FIELD NAME="apiurl" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" COMMENT="API URL to connect to NeuroK"/>
+        <FIELD NAME="apikey" TYPE="char" LENGTH="128" NOTNULL="false" SEQUENCE="false" COMMENT="API Key to connect to NeuroK API."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

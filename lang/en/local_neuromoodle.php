@@ -25,20 +25,29 @@
 
 // index.php
 $string['titlepage'] = 'NeuroMoodle';
+
 // settings.php
 $string['pluginname'] = 'NeuroMoodle';
 $string['neurokapiurl'] = 'NeuroK API URL';
 $string['neurokapikey'] = 'NeuroK API Key';
 $string['neurok_enableconnection'] = 'Enable NeuroK Connection';
 // lib.php
-$string['neurocoursemenu'] = 'Courses';
-$string['neurousersmenu'] = 'Users';
+//$string['neurocoursemenu'] = 'Courses';
+//$string['neurousersmenu'] = 'Users';
+$string['coursename'] = 'Course name';
+$string['coursename_help'] = 'Name of the NeuroK course';
+$string['coursedescription'] = 'Course summary';
+$string['coursedescription_help'] = 'Short description for the NeuroK course';
+$string['coursecreatoremail'] = 'Course creator email';
+$string['coursestartdate'] = 'Course start date';
 $string['infocreatecourse'] = 'Create a NeuroK course';
 $string['infocreateuser'] = 'Create a NeuroK user';
 $string['save'] = 'Save changes';
+// access.php
+$string['neuromoodle:manage']= 'Manage NeuroK courses and users';
 // Useful?
-$string['local_neuromoodle'] = 'NeuroK Server Connection';
-$string['plugininfo'] = 'This pluggin allows your Moodle installation to connect to NeuroK App. You can create NeuroK courses and manage them from Moodle. You can manage NeuroK users too, migrating them from Moodle.';
+//$string['local_neuromoodle'] = 'NeuroK Server Connection';
+//$string['plugininfo'] = 'This pluggin allows your Moodle installation to connect to NeuroK App. You can create NeuroK courses and manage them from Moodle. You can manage NeuroK users too, migrating them from Moodle.';
 
 
 
