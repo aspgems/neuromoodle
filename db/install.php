@@ -15,7 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Add page to admin menu.
+ * Provides code to be executed during the module installation
+ *
+ * This file replaces the legacy STATEMENTS section in db/install.xml,
+ * lib.php/modulename_install() post installation hook and partially defaults.php.
  *
  * @package    mod
  * @subpackage neuromoodle
@@ -23,13 +26,18 @@
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */
 
-defined('MOODLE_INTERNAL') || die;
+/**
+ * Post installation procedure
+ *
+ * @see upgrade_plugins_modules()
+ */
+function xmldb_neuromoodle_install() {
+}
 
-if ($hassiteconfig) {
-    $neuromoodlesettings = new admin_settingpage('neuromoodle', new lang_string('pluginname', 'neuromoodle'));
-    $neuromoodlesettings->add(new admin_setting_configcheckbox('neurok_enableconnection', new lang_string('neurokenableconnection', 'neuromoodle'), null, 0));
-    $neuromoodlesettings->add(new admin_setting_configtext('neurok_apiurl', new lang_string('neurokapiurl', 'neuromoodle'), null, '', PARAM_URL));
-    $neuromoodlesettings->add(new admin_setting_configtext('neurok_apikey', new lang_string('neurokapikey', 'neuromoodle'), null, '', PARAM_TEXT));
-    
-    $ADMIN->add('server', $neuromoodlesettings);
+/**
+ * Post installation recovery procedure
+ *
+ * @see upgrade_plugins_modules()
+ */
+function xmldb_neuromoodle_install_recovery() {
 }
