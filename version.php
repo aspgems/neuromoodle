@@ -17,14 +17,18 @@
 /**
  * Version details.
  *
- * @package    local
+ * @package    mod
  * @subpackage neuromoodle
  * @copyright  2015 ASPgems
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
+$plugin->component = 'mod_neuromoodle';
 $plugin->version = 2015101300;
-$plugin->maturity = MATURITY_BETA;
-$plugin->component = 'local_neuromoodle';
+$plugin->release = 'v0.0';
+$plugin->requires = 2013111800;
+$plugin->maturity = MATURITY_ALPHA;
+$plugin->cron = 0;
+$plugin->dependencies = array();

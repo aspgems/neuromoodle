@@ -15,19 +15,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language strings
+ * Provides code to be executed during the module installation
  *
- * @package    local
+ * This file replaces the legacy STATEMENTS section in db/install.xml,
+ * lib.php/modulename_install() post installation hook and partially defaults.php.
+ *
+ * @package    mod
  * @subpackage neuromoodle
  * @copyright  2015 ASPgems
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */
 
-$string['pluginname'] = 'NeuroMoodle';
-$string['local_neuromoodle'] = 'NeuroK Server Connection';
-$string['info'] = 'This pluggin allows your Moodle installation to connect to NeuroK App. You can create NeuroK courses and manage them from Moodle. You can manage NeuroK users too, migrating them from Moodle.';
-$string['neurokapiurl'] = 'NeuroK API URL';
-$string['enableconnection'] = 'Enable NeuroK Connection';
-$string['enableinfo'] = 'Default: No';
-$string['save'] = 'Save changes';
-$string['titleconfigpage'] = 'NeuroMoodle configuration';
+/**
+ * Post installation procedure
+ *
+ * @see upgrade_plugins_modules()
+ */
+function xmldb_neuromoodle_install() {
+}
+
+/**
+ * Post installation recovery procedure
+ *
+ * @see upgrade_plugins_modules()
+ */
+function xmldb_neuromoodle_install_recovery() {
+}
