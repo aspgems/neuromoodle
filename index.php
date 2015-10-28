@@ -17,7 +17,7 @@
 /**
  * NeuroK course management page.
  *
- * @package    local
+ * @package    mod
  * @subpackage neuromoodle
  * @copyright  2015 ASPgems
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
@@ -26,23 +26,9 @@
 require_once('../../config.php');
 require_once ('lib.php');
 
-$id = required_param('id', PARAM_INT); // Course ID.
-$course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
-unset($id);
-
-require_course_login($course, true);
-require_capability('local/neuromoodle:manage', context_system::instance());
-
-$PAGE->set_url('/local/neuromoodle/index.php', array('id' => $course->id));
-$PAGE->set_heading($course->fullname);
-$PAGE->set_title($course->shortname.': '. get_string('pluginname', 'local_neuromoodle'));
-$PAGE->set_pagelayout('incourse');
-
-$mform = new local_neuromoodle_createneurocourse_form(new moodle_url('/local/neuromoodle/neurocourse.php'));
-$mform2 = new local_neuromoodle_createneurouser_form(new moodle_url('/local/neuromoodle/neurouser.php'));
-
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('titlepage', 'local_neuromoodle'));
-$mform->display();
-$mform2->display();
-echo $OUTPUT->footer();
+// Get course ID from URL
+$id = required_param('id', PARAM_INT);
+// Ensure that the course specified is valid
+if (!$course = $DB->get_record('course', array('id'=> $id))) {
+    print_error('Course ID is incorrect');
+}

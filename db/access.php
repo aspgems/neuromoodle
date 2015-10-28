@@ -26,13 +26,35 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
-    'local/neuromoodle:manage' => array(
-            'riskbitmask' => RISK_XSS,
-            'captype' => 'write',
-            'contextlevel' => CONTEXT_COURSE,
-            'archetypes' => array(
-                    'editingteacher' => CAP_ALLOW,
-                    'manager' => CAP_ALLOW
-            )
+    'mod/neuromoodle:addinstance' => array(
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+        'clonepermissionsfrom' => 'moodle/course:manageactivities'
+    ),
+
+    'mod/neuromoodle:view' => array(
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_MODULE,
+        'legacy' => array(
+            'guest' => CAP_ALLOW,
+            'student' => CAP_ALLOW,
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
+
+    'mod/neuromoodle:submit' => array(
+        'riskbitmask' => RISK_SPAM,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'legacy' => array(
+            'student' => CAP_ALLOW
+        )
     ),
 );
