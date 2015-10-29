@@ -40,6 +40,7 @@ $string['neurokenableconnection'] = 'Enable NeuroK Connection';
 $string['neurokenableconnectioninfo'] = 'It allows to enable NeuroK connection in Moodle installation';
 // access.php
 $string['neurok:view'] = 'View NeuroK Course URL';
+$string['neurok:addinstance'] = 'Add NeuroK Course information';
 // mod_form.php
 $string['neurokcoursetitle'] = 'NeuroK course title';
 $string['neurokcoursetitle_help'] = 'NeuroK course title';
