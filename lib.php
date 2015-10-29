@@ -55,8 +55,14 @@ function neurok_supports($feature) {
         case FEATURE_SHOW_DESCRIPTION:
             return true;
         case FEATURE_GRADE_HAS_GRADE:
-            return false;
+            return true;
+        case FEATURE_GRADE_OUTCOMES:
+            return true;
         case FEATURE_BACKUP_MOODLE2:
+            return true;
+        case FEATURE_GROUPS:
+            return false;
+        case FEATURE_GROUPINGS:
             return false;
         default:
             return null;
@@ -233,7 +239,7 @@ function neurok_print_recent_mod_activity($activity, $courseid, $detail, $modnam
  * @return boolean
  */
 function neurok_cron () {
-    return true;
+    return false;
 }
 
 /**
