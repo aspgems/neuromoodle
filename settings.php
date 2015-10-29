@@ -25,11 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-if ($hassiteconfig) {
-    $neuroksettings = new admin_settingpage('neurok', new lang_string('modulename', 'neurok'));
-    $neuroksettings->add(new admin_setting_configcheckbox('neurok_enableconnection', new lang_string('neurokenableconnection', 'neurok'), null, 0));
-    $neuroksettings->add(new admin_setting_configtext('neurok_apiurl', new lang_string('neurokapiurl', 'neurok'), null, '', PARAM_URL));
-    $neuroksettings->add(new admin_setting_configtext('neurok_apikey', new lang_string('neurokapikey', 'neurok'), null, '', PARAM_TEXT));
-    
-    $ADMIN->add('modules', $neuroksettings);
+if ($ADMIN->fulltree) {
+    $settings->add(new admin_setting_configcheckbox('neurok_enableconnection', get_string('neurokenableconnection', 'neurok'), get_string('neurokenableconnectioninfo', 'neurok'), 0));
+    $settings->add(new admin_setting_configtext('neurok_apiurl', get_string('neurokapiurl', 'neurok'), get_string('neurokapiurlinfo', 'neurok'), '', PARAM_URL));
+    $settings->add(new admin_setting_configtext('neurok_apikey', get_string('neurokapikey', 'neurok'), get_string('neurokapikeyinfo', 'neurok'), '', PARAM_TEXT));
 }

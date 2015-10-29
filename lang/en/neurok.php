@@ -33,8 +33,11 @@ $string['modulenameplural'] = 'NeuroK';
 $string['neurokname'] = 'NeuroK';
 $string['neurokname_help'] = 'NeuroK information';
 $string['neurokapiurl'] = 'NeuroK API URL';
+$string['neurokapiurlinfo'] = 'NeuroK API URL used to connect Moodle to NeuroK';
 $string['neurokapikey'] = 'NeuroK API Key';
+$string['neurokapikeyinfo'] = 'NeuroK API Key used to validate connection between Moodle and NeuroK';
 $string['neurokenableconnection'] = 'Enable NeuroK Connection';
+$string['neurokenableconnectioninfo'] = 'It allows to enable NeuroK connection in Moodle installation';
 // access.php
 $string['neurok:view'] = 'View NeuroK Course URL';
 // mod_form.php
