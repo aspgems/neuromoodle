@@ -15,29 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Provides code to be executed during the module installation
- *
- * This file replaces the legacy STATEMENTS section in db/install.xml,
- * lib.php/modulename_install() post installation hook and partially defaults.php.
+ * The mod_neurok instance list viewed event.
  *
  * @package    mod
  * @subpackage neurok
- * @copyright  2015 ASPgems
+ * @copyright  2015 ASPgems <info@aspgems.com>
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */
 
-/**
- * Post installation procedure
- *
- * @see upgrade_plugins_modules()
- */
-function xmldb_neurok_install() {
-}
+namespace mod_neurok\event;
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
- * Post installation recovery procedure
- *
- * @see upgrade_plugins_modules()
+ * The mod_neurok instance list viewed event class.
  */
-function xmldb_neurok_install_recovery() {
+class course_module_instance_list_viewed extends \core\event\course_module_instance_list_viewed {
 }

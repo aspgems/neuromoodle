@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * NeuroMoodle Capabilities
+ * Neurok Capabilities
  *
  * @package    mod
- * @subpackage neuromoodle
+ * @subpackage neurok
  * @copyright  2015 ASPgems
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */
@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
-    'mod/neuromoodle:addinstance' => array(
+    'mod/neurok:addinstance' => array(
         'riskbitmask' => RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -37,7 +37,7 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/course:manageactivities'
     ),
 
-    'mod/neuromoodle:view' => array(
+    'mod/neurok:view' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
         'legacy' => array(
@@ -49,7 +49,7 @@ $capabilities = array(
         )
     ),
 /*
-    'mod/neuromoodle:submit' => array(
+    'mod/neurok:submit' => array(
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,

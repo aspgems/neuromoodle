@@ -10,12 +10,12 @@ It was created by developers at ASPgems.
 
 To install it using git, type this command in the root of your Moodle install:
 
-git clone https://github.com/aspgems/neuromoodle.git mod/neuromoodle
+git clone https://github.com/aspgems/neuromoodle.git mod/neurok
 
-Then add /mod/neuromoodle to your git ignore.
+Then add /mod/neurok to your git ignore.
 
 Alternatively, download the zip from:
 
 https://github.com/aspgems/neuromoodle/archive/master.zip
 
-Then, unzip it into the mod folder, and then rename the new folder to "neuromoodle".
+Then, unzip it into the mod folder, and then rename the new folder to "neurok".
