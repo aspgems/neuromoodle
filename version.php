@@ -18,14 +18,14 @@
  * Version details.
  *
  * @package    mod
- * @subpackage neuromoodle
+ * @subpackage neurok
  * @copyright  2015 ASPgems
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'mod_neuromoodle';
+$plugin->component = 'mod_neurok';
 $plugin->version = 2015101300;
 $plugin->release = 'v0.0';
 $plugin->requires = 2013111800;

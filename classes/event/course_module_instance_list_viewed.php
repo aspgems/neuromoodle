@@ -15,25 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language strings
+ * The mod_neurok instance list viewed event.
  *
  * @package    mod
- * @subpackage neuromoodle
- * @copyright  2015 ASPgems
+ * @subpackage neurok
+ * @copyright  2015 ASPgems <info@aspgems.com>
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */
 
-// index.php
-$string['titlepage'] = 'NeuroK Moodle Activity';
-$string['plugininfo'] = 'This module allows to connect to NeuroK App.';
-// settings.php
-$string['pluginname'] = 'NeuroK Moodle';
-$string['neuromoodlename'] = 'NeuroMoodle';
-$string['neuromoodlename_help'] = 'NeuroMoodle information';
-$string['neurokapiurl'] = 'NeuroK API URL';
-$string['neurokapikey'] = 'NeuroK API Key';
-$string['neurokenableconnection'] = 'Enable NeuroK Connection';
-// mod_form.php
-$string['neurokcourselink'] = 'NeuroK course URL';
-$string['neurokcourselink_help'] = 'URL to access NeuroK course';
+namespace mod_neurok\event;
 
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * The mod_neurok instance list viewed event class.
+ */
+class course_module_instance_list_viewed extends \core\event\course_module_instance_list_viewed {
+}

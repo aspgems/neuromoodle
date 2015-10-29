@@ -18,7 +18,7 @@
  * NeuroK course management page.
  *
  * @package    mod
- * @subpackage neuromoodle
+ * @subpackage neurok
  * @copyright  2015 ASPgems
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */

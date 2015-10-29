@@ -15,18 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library of interface functions and constants for module neuromoodle
+ * Library of interface functions and constants for module neurok
  *
  * All the core Moodle functions, neeeded to allow the module to work
  * integrated in Moodle should be placed here.
  *
- * All the neuromoodle specific functions, needed to implement all the module
+ * All the neurok specific functions, needed to implement all the module
  * logic, should go to locallib.php. This will help to save some memory when
  * Moodle is performing actions across all modules.
  *
  * @package    mod
- * @subpackage neuromoodle
- * @copyright  2015 ASPgems
+ * @subpackage neurok
+ * @copyright  2015 ASPgems <info@aspgems.com>
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */
 
@@ -47,7 +47,7 @@ define('NEUROKACTIVITY', 'NeuroK');
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed true if the feature is supported, null if unknown
  */
-function neuromoodle_supports($feature) {
+function neurok_supports($feature) {
 
     switch($feature) {
         case FEATURE_MOD_INTRO:
@@ -56,67 +56,73 @@ function neuromoodle_supports($feature) {
             return true;
         case FEATURE_GRADE_HAS_GRADE:
             return true;
+        case FEATURE_GRADE_OUTCOMES:
+            return true;
         case FEATURE_BACKUP_MOODLE2:
             return true;
+        case FEATURE_GROUPS:
+            return false;
+        case FEATURE_GROUPINGS:
+            return false;
         default:
             return null;
     }
 }
 
 /**
- * Saves a new instance of the neuromoodle into the database
+ * Saves a new instance of the neurok into the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will create a new instance and return the id number
  * of the new instance.
  *
- * @param stdClass $neuromoodle Submitted data from the form in mod_form.php
- * @param mod_neuromoodle_mod_form $mform The form instance itself (if needed)
- * @return int The id of the newly inserted neuromoodle record
+ * @param stdClass $neurok Submitted data from the form in mod_form.php
+ * @param mod_neurok_mod_form $mform The form instance itself (if needed)
+ * @return int The id of the newly inserted neurok record
  */
-function neuromoodle_add_instance(stdClass $neuromoodle, mod_neuromoodle_mod_form $mform = null) {
+function neurok_add_instance(stdClass $neurok, mod_neurok_mod_form $mform = null) {
     global $DB;
 
-    $neuromoodle->timecreated = time();
+    $neurok->timecreated = time();
 
     // You may have to add extra stuff in here.
 
-    $neuromoodle->id = $DB->insert_record('neuromoodle', $neuromoodle);
+    $neurok->id = $DB->insert_record('neurok', $neurok);
 
-    neuromoodle_grade_item_update($neuromoodle);
+    neurok_grade_item_update($neurok);
 
-    return $neuromoodle->id;
+    return $neurok->id;
 }
 
 /**
- * Updates an instance of the neuromoodle in the database
+ * Updates an instance of the neurok in the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will update an existing instance with new data.
  *
- * @param stdClass $neuromoodle An object from the form in mod_form.php
- * @param mod_neuromoodle_mod_form $mform The form instance itself (if needed)
+ * @param stdClass $neurok An object from the form in mod_form.php
+ * @param mod_neurok_mod_form $mform The form instance itself (if needed)
  * @return boolean Success/Fail
  */
-function neuromoodle_update_instance(stdClass $neuromoodle, mod_neuromoodle_mod_form $mform = null) {
+function neurok_update_instance(stdClass $neurok, mod_neurok_mod_form $mform = null) {
     global $DB;
 
-    $neuromoodle->timemodified = time();
-    $neuromoodle->id = $neuromoodle->instance;
+    $neurok->timemodified = time();
+    $neurok->id = $neurok->instance;
 
     // You may have to add extra stuff in here.
 
-    $result = $DB->update_record('neuromoodle', $neuromoodle);
+    $result = $DB->update_record('neurok', $neurok);
 
-    neuromoodle_grade_item_update($neuromoodle);
+    neurok_grade_item_update($neurok);
 
     return $result;
 }
 
 /**
- * Removes an instance of the neuromoodle from the database
+ * Removes an instance of the neurok from the database
  *
  * Given an ID of an instance of this module,
  * this function will permanently delete the instance
@@ -125,18 +131,18 @@ function neuromoodle_update_instance(stdClass $neuromoodle, mod_neuromoodle_mod_
  * @param int $id Id of the module instance
  * @return boolean Success/Failure
  */
-function neuromoodle_delete_instance($id) {
+function neurok_delete_instance($id) {
     global $DB;
 
-    if (! $neuromoodle = $DB->get_record('neuromoodle', array('id' => $id))) {
+    if (! $neurok = $DB->get_record('neurok', array('id' => $id))) {
         return false;
     }
 
     // Delete any dependent records here.
 
-    $DB->delete_records('neuromoodle', array('id' => $neuromoodle->id));
+    $DB->delete_records('neurok', array('id' => $neurok->id));
 
-    neuromoodle_grade_item_delete($neuromoodle);
+    neurok_grade_item_delete($neurok);
 
     return true;
 }
@@ -152,10 +158,10 @@ function neuromoodle_delete_instance($id) {
  * @param stdClass $course The course record
  * @param stdClass $user The user record
  * @param cm_info|stdClass $mod The course module info object or record
- * @param stdClass $neuromoodle The neuromoodle instance record
+ * @param stdClass $neurok The neurok instance record
  * @return stdClass|null
  */
-function neuromoodle_user_outline($course, $user, $mod, $neuromoodle) {
+function neurok_user_outline($course, $user, $mod, $neurok) {
 
     $return = new stdClass();
     $return->time = 0;
@@ -172,21 +178,21 @@ function neuromoodle_user_outline($course, $user, $mod, $neuromoodle) {
  * @param stdClass $course the current course record
  * @param stdClass $user the record of the user we are generating report for
  * @param cm_info $mod course module info
- * @param stdClass $neuromoodle the module instance record
+ * @param stdClass $neurok the module instance record
  */
-function neuromoodle_user_complete($course, $user, $mod, $neuromoodle) {
+function neurok_user_complete($course, $user, $mod, $neurok) {
 }
 
 /**
  * Given a course and a time, this module should find recent activity
- * that has occurred in neuromoodle activities and print it out.
+ * that has occurred in neurok activities and print it out.
  *
  * @param stdClass $course The course record
  * @param bool $viewfullnames Should we display full names
  * @param int $timestart Print activity since this timestamp
  * @return boolean True if anything was printed, otherwise false
  */
-function neuromoodle_print_recent_activity($course, $viewfullnames, $timestart) {
+function neurok_print_recent_activity($course, $viewfullnames, $timestart) {
     return false;
 }
 
@@ -195,7 +201,7 @@ function neuromoodle_print_recent_activity($course, $viewfullnames, $timestart) 
  *
  * This callback function is supposed to populate the passed array with
  * custom activity records. These records are then rendered into HTML via
- * {@link neuromoodle_print_recent_mod_activity()}.
+ * {@link neurok_print_recent_mod_activity()}.
  *
  * Returns void, it adds items into $activities and increases $index.
  *
@@ -207,11 +213,11 @@ function neuromoodle_print_recent_activity($course, $viewfullnames, $timestart) 
  * @param int $userid check for a particular user's activity only, defaults to 0 (all users)
  * @param int $groupid check for a particular group's activity only, defaults to 0 (all groups)
  */
-function neuromoodle_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid=0, $groupid=0) {
+function neurok_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid=0, $groupid=0) {
 }
 
 /**
- * Prints single activity item prepared by {@link neuromoodle_get_recent_mod_activity()}
+ * Prints single activity item prepared by {@link neurok_get_recent_mod_activity()}
  *
  * @param stdClass $activity activity record with added 'cmid' property
  * @param int $courseid the id of the course we produce the report for
@@ -219,7 +225,7 @@ function neuromoodle_get_recent_mod_activity(&$activities, &$index, $timestart, 
  * @param array $modnames as returned by {@link get_module_types_names()}
  * @param bool $viewfullnames display users' full names
  */
-function neuromoodle_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
+function neurok_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
 }
 
 /**
@@ -232,8 +238,8 @@ function neuromoodle_print_recent_mod_activity($activity, $courseid, $detail, $m
  *
  * @return boolean
  */
-function neuromoodle_cron () {
-    return true;
+function neurok_cron () {
+    return false;
 }
 
 /**
@@ -244,26 +250,26 @@ function neuromoodle_cron () {
  *
  * @return array
  */
-function neuromoodle_get_extra_capabilities() {
+function neurok_get_extra_capabilities() {
     return array();
 }
 
 /* Gradebook API */
 
 /**
- * Is a given scale used by the instance of neuromoodle?
+ * Is a given scale used by the instance of neurok?
  *
- * This function returns if a scale is being used by one neuromoodle
+ * This function returns if a scale is being used by one neurok
  * if it has support for grading and scales.
  *
- * @param int $neuromoodleid ID of an instance of this module
+ * @param int $neurokid ID of an instance of this module
  * @param int $scaleid ID of the scale
- * @return bool true if the scale is used by the given neuromoodle instance
+ * @return bool true if the scale is used by the given neurok instance
  */
-function neuromoodle_scale_used($neuromoodleid, $scaleid) {
+function neurok_scale_used($neurokid, $scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('neuromoodle', array('id' => $neuromoodleid, 'grade' => -$scaleid))) {
+    if ($scaleid and $DB->record_exists('neurok', array('id' => $neurokid, 'grade' => -$scaleid))) {
         return true;
     } else {
         return false;
@@ -271,17 +277,17 @@ function neuromoodle_scale_used($neuromoodleid, $scaleid) {
 }
 
 /**
- * Checks if scale is being used by any instance of neuromoodle.
+ * Checks if scale is being used by any instance of neurok.
  *
  * This is used to find out if scale used anywhere.
  *
  * @param int $scaleid ID of the scale
- * @return boolean true if the scale is used by any neuromoodle instance
+ * @return boolean true if the scale is used by any neurok instance
  */
-function neuromoodle_scale_used_anywhere($scaleid) {
+function neurok_scale_used_anywhere($scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('neuromoodle', array('grade' => -$scaleid))) {
+    if ($scaleid and $DB->record_exists('neurok', array('grade' => -$scaleid))) {
         return true;
     } else {
         return false;
@@ -289,29 +295,29 @@ function neuromoodle_scale_used_anywhere($scaleid) {
 }
 
 /**
- * Creates or updates grade item for the given neuromoodle instance
+ * Creates or updates grade item for the given neurok instance
  *
  * Needed by {@link grade_update_mod_grades()}.
  *
- * @param stdClass $neuromoodle instance object with extra cmidnumber and modname property
+ * @param stdClass $neurok instance object with extra cmidnumber and modname property
  * @param bool $reset reset grades in the gradebook
  * @return void
  */
-function neuromoodle_grade_item_update(stdClass $neuromoodle, $reset=false) {
+function neurok_grade_item_update(stdClass $neurok, $reset=false) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
 
     $item = array();
-    $item['itemname'] = clean_param($neuromoodle->name, PARAM_NOTAGS);
+    $item['itemname'] = clean_param($neurok->name, PARAM_NOTAGS);
     $item['gradetype'] = GRADE_TYPE_VALUE;
 
-    if ($neuromoodle->grade > 0) {
+    if ($neurok->grade > 0) {
         $item['gradetype'] = GRADE_TYPE_VALUE;
-        $item['grademax']  = $neuromoodle->grade;
+        $item['grademax']  = $neurok->grade;
         $item['grademin']  = 0;
-    } else if ($neuromoodle->grade < 0) {
+    } else if ($neurok->grade < 0) {
         $item['gradetype'] = GRADE_TYPE_SCALE;
-        $item['scaleid']   = -$neuromoodle->grade;
+        $item['scaleid']   = -$neurok->grade;
     } else {
         $item['gradetype'] = GRADE_TYPE_NONE;
     }
@@ -320,40 +326,40 @@ function neuromoodle_grade_item_update(stdClass $neuromoodle, $reset=false) {
         $item['reset'] = true;
     }
 
-    grade_update('mod/neuromoodle', $neuromoodle->course, 'mod', 'neuromoodle',
-            $neuromoodle->id, 0, null, $item);
+    grade_update('mod/neurok', $neurok->course, 'mod', 'neurok',
+            $neurok->id, 0, null, $item);
 }
 
 /**
- * Delete grade item for given neuromoodle instance
+ * Delete grade item for given neurok instance
  *
- * @param stdClass $neuromoodle instance object
+ * @param stdClass $neurok instance object
  * @return grade_item
  */
-function neuromoodle_grade_item_delete($neuromoodle) {
+function neurok_grade_item_delete($neurok) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
 
-    return grade_update('mod/neuromoodle', $neuromoodle->course, 'mod', 'neuromoodle',
-            $neuromoodle->id, 0, null, array('deleted' => 1));
+    return grade_update('mod/neurok', $neurok->course, 'mod', 'neurok',
+            $neurok->id, 0, null, array('deleted' => 1));
 }
 
 /**
- * Update neuromoodle grades in the gradebook
+ * Update neurok grades in the gradebook
  *
  * Needed by {@link grade_update_mod_grades()}.
  *
- * @param stdClass $neuromoodle instance object with extra cmidnumber and modname property
+ * @param stdClass $neurok instance object with extra cmidnumber and modname property
  * @param int $userid update grade of specific user only, 0 means all participants
  */
-function neuromoodle_update_grades(stdClass $neuromoodle, $userid = 0) {
+function neurok_update_grades(stdClass $neurok, $userid = 0) {
     global $CFG, $DB;
     require_once($CFG->libdir.'/gradelib.php');
 
     // Populate array of grade objects indexed by userid.
     $grades = array();
 
-    grade_update('mod/neuromoodle', $neuromoodle->course, 'mod', 'neuromoodle', $neuromoodle->id, 0, $grades);
+    grade_update('mod/neurok', $neurok->course, 'mod', 'neurok', $neurok->id, 0, $grades);
 }
 
 /* File API */
@@ -369,14 +375,14 @@ function neuromoodle_update_grades(stdClass $neuromoodle, $userid = 0) {
  * @param stdClass $context
  * @return array of [(string)filearea] => (string)description
  */
-function neuromoodle_get_file_areas($course, $cm, $context) {
+function neurok_get_file_areas($course, $cm, $context) {
     return array();
 }
 
 /**
- * File browsing support for neuromoodle file areas
+ * File browsing support for neurok file areas
  *
- * @package mod_neuromoodle
+ * @package mod_neurok
  * @category files
  *
  * @param file_browser $browser
@@ -390,25 +396,25 @@ function neuromoodle_get_file_areas($course, $cm, $context) {
  * @param string $filename
  * @return file_info instance or null if not found
  */
-function neuromoodle_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
+function neurok_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
     return null;
 }
 
 /**
- * Serves the files from the neuromoodle file areas
+ * Serves the files from the neurok file areas
  *
- * @package mod_neuromoodle
+ * @package mod_neurok
  * @category files
  *
  * @param stdClass $course the course object
  * @param stdClass $cm the course module object
- * @param stdClass $context the neuromoodle's context
+ * @param stdClass $context the neurok's context
  * @param string $filearea the name of the file area
  * @param array $args extra arguments (itemid, path)
  * @param bool $forcedownload whether or not force download
  * @param array $options additional options affecting the file serving
  */
-function neuromoodle_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
+function neurok_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
     global $DB, $CFG;
 
     if ($context->contextlevel != CONTEXT_MODULE) {
@@ -423,28 +429,28 @@ function neuromoodle_pluginfile($course, $cm, $context, $filearea, array $args, 
 /* Navigation API */
 
 /**
- * Extends the global navigation tree by adding neuromoodle nodes if there is a relevant content
+ * Extends the global navigation tree by adding neurok nodes if there is a relevant content
  *
  * This can be called by an AJAX request so do not rely on $PAGE as it might not be set up properly.
  *
- * @param navigation_node $navref An object representing the navigation tree node of the neuromoodle module instance
+ * @param navigation_node $navref An object representing the navigation tree node of the neurok module instance
  * @param stdClass $course current course record
- * @param stdClass $module current neuromoodle instance record
+ * @param stdClass $module current neurok instance record
  * @param cm_info $cm course module information
  */
-function neuromoodle_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
+function neurok_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
     // TODO Delete this function and its docblock, or implement it.
 }
 
 /**
- * Extends the settings navigation with the neuromoodle settings
+ * Extends the settings navigation with the neurok settings
  *
- * This function is called when the context for the page is a neuromoodle module. This is not called by AJAX
+ * This function is called when the context for the page is a neurok module. This is not called by AJAX
  * so it is safe to rely on the $PAGE.
  *
  * @param settings_navigation $settingsnav complete settings navigation tree
- * @param navigation_node $neuromoodlenode neuromoodle administration node
+ * @param navigation_node $neuroknode neurok administration node
  */
-function neuromoodle_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $neuromoodlenode=null) {
+function neurok_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $neuroknode=null) {
     // TODO Delete this function and its docblock, or implement it.
 }

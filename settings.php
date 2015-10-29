@@ -15,21 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Add page to admin menu.
+ * Add page to activity module menu.
  *
  * @package    mod
- * @subpackage neuromoodle
- * @copyright  2015 ASPgems
+ * @subpackage neurok
+ * @copyright  2015 ASPgems <info@aspgems.com>
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-if ($hassiteconfig) {
-    $neuromoodlesettings = new admin_settingpage('neuromoodle', new lang_string('pluginname', 'neuromoodle'));
-    $neuromoodlesettings->add(new admin_setting_configcheckbox('neurok_enableconnection', new lang_string('neurokenableconnection', 'neuromoodle'), null, 0));
-    $neuromoodlesettings->add(new admin_setting_configtext('neurok_apiurl', new lang_string('neurokapiurl', 'neuromoodle'), null, '', PARAM_URL));
-    $neuromoodlesettings->add(new admin_setting_configtext('neurok_apikey', new lang_string('neurokapikey', 'neuromoodle'), null, '', PARAM_TEXT));
-    
-    $ADMIN->add('server', $neuromoodlesettings);
+if ($ADMIN->fulltree) {
+    $settings->add(new admin_setting_configcheckbox('neurok_enableconnection', get_string('neurokenableconnection', 'neurok'), get_string('neurokenableconnectioninfo', 'neurok'), 0));
+    $settings->add(new admin_setting_configtext('neurok_apiurl', get_string('neurokapiurl', 'neurok'), get_string('neurokapiurlinfo', 'neurok'), '', PARAM_URL));
+    $settings->add(new admin_setting_configtext('neurok_apikey', get_string('neurokapikey', 'neurok'), get_string('neurokapikeyinfo', 'neurok'), '', PARAM_TEXT));
 }
