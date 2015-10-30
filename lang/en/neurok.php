@@ -46,4 +46,4 @@ $string['neurokcoursetitle'] = 'NeuroK course title';
 $string['neurokcoursetitle_help'] = 'NeuroK course title';
 $string['neurokcourselink'] = 'NeuroK course URL';
 $string['neurokcourselink_help'] = 'URL to access NeuroK course';
-
+$string['invalidurl'] = 'Entered URL is not a valid NeuroK course URL';

@@ -28,6 +28,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * NeuroK course base URL
+ */
+define('NEUROKBASEURL', 'app.neurok.es');
+
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 
 class mod_neurok_mod_form extends moodleform_mod {
@@ -69,5 +74,22 @@ class mod_neurok_mod_form extends moodleform_mod {
 
         // Add standard buttons, common to all modules.
         $this->add_action_buttons();
+    }
+    
+    function validation($data, $files) {
+        $errors = parent::validation($data, $files);
+    
+        // Validating entered NeuroK course url.
+        if (!empty($data['url'])) {
+            $testurl = $data['url'];
+            if (preg_match('|^https:|i', $testurl)) {
+                if (!preg_match('|'. NEUROKBASEURL .'|i', $testurl)) {
+                    $errors['url'] = get_string('invalidurl', 'neurok');
+                }
+            } else {
+                $errors['url'] = get_string('invalidurl', 'neurok');
+            }
+        }
+        return $errors;
     }
 }
