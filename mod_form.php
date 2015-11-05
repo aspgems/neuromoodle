@@ -67,7 +67,7 @@ class mod_neurok_mod_form extends moodleform_mod {
         $this->standard_intro_elements();
 
         // Add standard grading elements.
-        $this->standard_grading_coursemodule_elements();
+        // $this->standard_grading_coursemodule_elements();
 
         // Add standard elements, common to all modules.
         $this->standard_coursemodule_elements();

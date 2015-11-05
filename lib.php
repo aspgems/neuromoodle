@@ -90,7 +90,7 @@ function neurok_add_instance(stdClass $neurok, mod_neurok_mod_form $mform = null
 
     $neurok->id = $DB->insert_record('neurok', $neurok);
 
-    neurok_grade_item_update($neurok);
+    // neurok_grade_item_update($neurok);
 
     return $neurok->id;
 }
@@ -116,7 +116,7 @@ function neurok_update_instance(stdClass $neurok, mod_neurok_mod_form $mform = n
 
     $result = $DB->update_record('neurok', $neurok);
 
-    neurok_grade_item_update($neurok);
+    // neurok_grade_item_update($neurok);
 
     return $result;
 }
@@ -142,7 +142,7 @@ function neurok_delete_instance($id) {
 
     $DB->delete_records('neurok', array('id' => $neurok->id));
 
-    neurok_grade_item_delete($neurok);
+    // neurok_grade_item_delete($neurok);
 
     return true;
 }
@@ -266,6 +266,7 @@ function neurok_get_extra_capabilities() {
  * @param int $scaleid ID of the scale
  * @return bool true if the scale is used by the given neurok instance
  */
+/**
 function neurok_scale_used($neurokid, $scaleid) {
     global $DB;
 
@@ -275,7 +276,7 @@ function neurok_scale_used($neurokid, $scaleid) {
         return false;
     }
 }
-
+ */
 /**
  * Checks if scale is being used by any instance of neurok.
  *
@@ -284,6 +285,7 @@ function neurok_scale_used($neurokid, $scaleid) {
  * @param int $scaleid ID of the scale
  * @return boolean true if the scale is used by any neurok instance
  */
+/**
 function neurok_scale_used_anywhere($scaleid) {
     global $DB;
 
@@ -293,7 +295,7 @@ function neurok_scale_used_anywhere($scaleid) {
         return false;
     }
 }
-
+*/
 /**
  * Creates or updates grade item for the given neurok instance
  *
@@ -303,6 +305,7 @@ function neurok_scale_used_anywhere($scaleid) {
  * @param bool $reset reset grades in the gradebook
  * @return void
  */
+/**
 function neurok_grade_item_update(stdClass $neurok, $reset=false) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
@@ -329,13 +332,14 @@ function neurok_grade_item_update(stdClass $neurok, $reset=false) {
     grade_update('mod/neurok', $neurok->course, 'mod', 'neurok',
             $neurok->id, 0, null, $item);
 }
-
+*/
 /**
  * Delete grade item for given neurok instance
  *
  * @param stdClass $neurok instance object
  * @return grade_item
  */
+/**
 function neurok_grade_item_delete($neurok) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
@@ -343,7 +347,7 @@ function neurok_grade_item_delete($neurok) {
     return grade_update('mod/neurok', $neurok->course, 'mod', 'neurok',
             $neurok->id, 0, null, array('deleted' => 1));
 }
-
+*/
 /**
  * Update neurok grades in the gradebook
  *
@@ -352,6 +356,7 @@ function neurok_grade_item_delete($neurok) {
  * @param stdClass $neurok instance object with extra cmidnumber and modname property
  * @param int $userid update grade of specific user only, 0 means all participants
  */
+/**
 function neurok_update_grades(stdClass $neurok, $userid = 0) {
     global $CFG, $DB;
     require_once($CFG->libdir.'/gradelib.php');
@@ -361,7 +366,7 @@ function neurok_update_grades(stdClass $neurok, $userid = 0) {
 
     grade_update('mod/neurok', $neurok->course, 'mod', 'neurok', $neurok->id, 0, $grades);
 }
-
+*/
 /* File API */
 
 /**
