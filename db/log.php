@@ -15,37 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Neurok Capabilities
+ * Neurok log information
  *
  * @package    mod
  * @subpackage neurok
  * @copyright  2015 ASPgems
  * @license    https://github.com/aspgems/neuromoodle/blob/master/LICENSE
  */
-
+ 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-    'mod/neurok:addinstance' => array(
-        'riskbitmask' => RISK_XSS,
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_COURSE,
-        'archetypes' => array(
-            'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
-        ),
-        'clonepermissionsfrom' => 'moodle/course:manageactivities'
-    ),
-
-    'mod/neurok:view' => array(
-        'captype' => 'read',
-        'contextlevel' => CONTEXT_MODULE,
-        'legacy' => array(
-            'guest' => CAP_ALLOW,
-            'student' => CAP_ALLOW,
-            'teacher' => CAP_ALLOW,
-            'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
-        )
-    ),
+$logs = array(
+        array('module'=>'neurok', 'action'=>'view', 'mtable'=>'neurok', 'field'=>'name'),
+        array('module'=>'neurok', 'action'=>'view all', 'mtable'=>'neurok', 'field'=>'name'),
+        array('module'=>'neurok', 'action'=>'update', 'mtable'=>'neurok', 'field'=>'name'),
+        array('module'=>'neurok', 'action'=>'add', 'mtable'=>'neurok', 'field'=>'name'),
 );

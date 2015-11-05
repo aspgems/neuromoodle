@@ -26,8 +26,8 @@
  * @license    https://github.com/aspgems/neurok/blob/master/LICENSE
  */
 
-require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
-require_once(dirname(__FILE__).'/lib.php');
+require_once('../../config.php');
+require_once($CFG->dirroot . '/mod/neurok/lib.php');
 
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // Neuromoodle instance ID
