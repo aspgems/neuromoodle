@@ -61,10 +61,15 @@ $PAGE->set_heading(format_string($course->fullname));
 
 // Output starts here.
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('titlepage', 'neurok'));
+echo $OUTPUT->heading(get_string('coursesummary', 'neurok'));
 // Conditions to show the intro can change to look for own settings or whatever.
 if ($neurok->intro) {
     echo $OUTPUT->box(format_module_intro('neurok', $neurok, $cm->id), 'generalbox mod_introbox', 'neurokintro');
 }
+// NeuroK course link
+echo $OUTPUT->box_start('generalbox mod_introbox', 'neurokurl');
+echo $OUTPUT->action_link($neurok->url, get_string('accessurl', 'neurok'));
+echo $OUTPUT->box_end();
+
 // Finish the page.
 echo $OUTPUT->footer();

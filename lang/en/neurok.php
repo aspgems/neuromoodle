@@ -47,3 +47,6 @@ $string['neurokcoursetitle_help'] = 'NeuroK course title';
 $string['neurokcourselink'] = 'NeuroK course URL';
 $string['neurokcourselink_help'] = 'URL to access NeuroK course';
 $string['invalidurl'] = 'Entered URL is not a valid NeuroK course URL';
+// view.php
+$string['accessurl'] = 'Go to the course';
+$string['coursesummary'] = 'NeuroK course summary';
